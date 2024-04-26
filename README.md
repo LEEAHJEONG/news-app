@@ -1,70 +1,155 @@
-# Getting Started with Create React App
+# 프로젝트 생성
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+- `npx create-react-app ./`
+- `npm i normalize.css`
+- `npm i @emotion/react`
+- `npm i @emotion/styled`
+<!-- - `npm i add sass` -->
 
-## Available Scripts
+- .prettierrc.json 파일 생성
 
-In the project directory, you can run:
+```json
+{
+  "singleQuote": false,
+  "semi": true,
+  "useTabs": false,
+  "tabWidth": 2,
+  "trailingComma": "all",
+  "printWidth": 80,
+  "arrowParens": "avoid",
+  "endOfLine": "auto"
+}
+```
 
-### `npm start`
+- `npm install eslint --dev`
+- `npm install eslint-config-react-app --save-dev`
+- `npx eslint --init`
+- `npm install eslint-config-prettier --save-dev`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- .eslintrc.js 파일 수정
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+```js
+module.exports = {
+  env: {
+    browser: true,
+    es2021: true,
+    node: true,
+  },
+  extends: ["eslint:recommended", "plugin:react/recommended", "prettier"],
+  overrides: [
+    {
+      env: {
+        node: true,
+      },
+      files: [".eslintrc.{js,cjs}"],
+      parserOptions: {
+        sourceType: "script",
+      },
+    },
+  ],
+  parserOptions: {
+    ecmaVersion: "latest",
+    sourceType: "module",
+  },
+  plugins: ["react"],
+  rules: {
+    "react/react-in-jsx-scope": "off",
+    "react/prop-types": "off",
+    "no-unused-vars": "off",
+  },
+};
+```
 
-### `npm test`
+- `npm install @babel/plugin-proposal-private-property-in-object --dev`
+- `npm install react-router-dom`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- axios 설치
+- `npm i axios`
 
-### `npm run build`
+- src.index.css 수정
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```css
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  outline-style: none;
+}
+ul,
+li {
+  list-style: none;
+}
+a {
+  color: #000000;
+  text-decoration: none;
+}
+img {
+  vertical-align: middle;
+  border: 0;
+}
+html {
+  font-size: 10px;
+}
+body {
+  font-family: "Pretendard-Regular", sans-serif;
+  font-size: 1rem;
+  line-height: 1.25;
+  letter-spacing: -0.23px;
+  word-break: keep-all;
+  color: #000000;
+}
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+# 2
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- src/App.js
 
-### `npm run eject`
+```js
+function App() {
+  return (
+    <div>
+      <h1>뉴스 외부 API 연동 앱</h1>
+    </div>
+  );
+}
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+export default App;
+```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- src/index.js
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+```js
+import React from "react";
+import ReactDOM from "react-dom/client";
+import App from "./App";
+import "./index.css";
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(<App />);
+```
 
-## Learn More
+- public/index.html 기본적인 것 수정
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+-src/pages/NewsPage.js
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```js
+import React from "react";
+import NewsItem from "../components/NewsItem";
+import NewsList from "../components/NewsList";
 
-### Code Splitting
+const NewsPage = () => {
+  return (
+    <div>
+      <h2>뉴스 목록 페이지입니다.</h2>
+      <NewsList />
+    </div>
+  );
+};
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+export default NewsPage;
+```
 
-### Analyzing the Bundle Size
+# 3
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- https://newsapi.org/register
+- https://newsapi.org/s/south-korea-news-api
