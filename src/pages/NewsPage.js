@@ -8,7 +8,7 @@ const NewsPage = () => {
   const category = params.category || "all";
   return (
     <div>
-      <h2>뉴스 목록 페이지입니다.</h2>
+      {/* <h2>뉴스 목록 페이지입니다.</h2> */}
       <Categories />
       <NewsList category={category} />
     </div>
